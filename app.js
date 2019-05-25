@@ -23,6 +23,9 @@ mongoose.connect(config.MONGODB,{ useNewUrlParser: true }, err => {
         app.use("/api/user", userRouter);
         auth(app, userModel);
         const port = process.env.PORT || 8000;
+        app.get("/", (req, res)=> {
+            res.send("Hello");
+        })
         app.listen(port, err => {
             if(err) console.log(err);
             else console.log("Server is running...")

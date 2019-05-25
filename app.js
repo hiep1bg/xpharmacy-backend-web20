@@ -3,10 +3,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
-
+const userModel = require('./api/controllers/user/user')
 const config = require('./config-local.json');
 const userRouter = require('./api/controllers/user/router');
-
+const auth = require('./api/auth');
 var app = express();
 
 app.use(logger('dev'));
@@ -21,8 +21,9 @@ mongoose.connect(config.MONGODB,{ useNewUrlParser: true }, err => {
     else{
         console.log("Successful connect to mongodb...");    
         app.use("/api/user", userRouter);
-
-        app.listen(8000, err => {
+        auth(app, userModel);
+        const port = process.env.PORT || 8000;
+        app.listen(port, err => {
             if(err) console.log(err);
             else console.log("Server is running...")
         })

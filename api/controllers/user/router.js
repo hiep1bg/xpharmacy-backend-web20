@@ -14,14 +14,14 @@ router.get("/", (req, res) => {
     getAllUsers(req.query.page || 1)
     .then(users => res.status(200).json(users))
     .catch(err => res.status(500).send(err));
-})
+});
 
 router.get("/:id", (req, res) => {
     getOneUser(req.params.id, req.body.password)
     .then(user => res.status(200).json(user))
     .catch(err => res.status(500).send(err));
-})
+});
 
-
+router.post("/login");
 
 module.exports = router;

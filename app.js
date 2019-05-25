@@ -21,7 +21,7 @@ mongoose.connect(config.MONGODB,{ useNewUrlParser: true }, err => {
     else{
         console.log("Successful connect to mongodb...");    
         app.use("/api/user", userRouter);
-        auth(app, userModel);
+        // auth(app, userModel);
         const port = process.env.PORT || 8000;
         app.get("/", (req, res)=> {
             res.send("Hello");
